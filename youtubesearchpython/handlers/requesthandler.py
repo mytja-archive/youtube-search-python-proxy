@@ -33,10 +33,12 @@ class RequestHandler(ComponentHandler):
                 'User-Agent': userAgent,
             }
         )
-        try:
-            self.response = urlopen(request).read().decode('utf_8')
-        except:
-            raise Exception('ERROR: Could not make request.')
+        if self.proxy and self.proxyType:
+            request.set_proxy(self.proxy, self.proxyType)
+        #try:
+        self.response = urlopen(request).read().decode('utf_8')
+        #except:
+        #    raise Exception('ERROR: Could not make request.')
     
     def _parseSource(self) -> None:
         try:

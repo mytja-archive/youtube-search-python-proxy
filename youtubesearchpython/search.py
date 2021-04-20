@@ -137,9 +137,9 @@ class VideosSearch(SearchInternal):
             ]
         }
     '''
-    def __init__(self, query: str, limit: int = 20, language: str = 'en', region: str = 'US'):
+    def __init__(self, query: str, limit: int = 20, language: str = 'en', region: str = 'US', proxy: str = None, proxyType: str = None):
         self.searchMode = (True, False, False)
-        super().__init__(query, limit, language, region, SearchMode.videos)
+        super().__init__(query, limit, language, region, SearchMode.videos, proxy, proxyType)
         self._getComponents(*self.searchMode)
 
 

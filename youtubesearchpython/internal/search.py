@@ -10,13 +10,18 @@ class SearchInternal(RequestHandler, ComponentHandler):
     responseSource = None
     resultComponents = []
 
-    def __init__(self, query: str, limit: int, language: str, region: str, searchPreferences: str):
+    def __init__(self, query: str, limit: int, language: str, region: str, searchPreferences: str, proxy = None, proxyType = None):
+        if not (proxyType == "https" or proxyType == "http" or proxyType == None):
+            raise ValueError("Invalid Proxy method. Must be http or https.")
+        
         self.query = query
         self.limit = limit
         self.language = language
         self.region = region
         self.searchPreferences = searchPreferences
         self.continuationKey = None
+        self.proxyType = proxyType
+        self.proxy = proxy
         self._makeRequest()
         self._parseSource()
     

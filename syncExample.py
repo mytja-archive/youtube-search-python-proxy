@@ -16,7 +16,7 @@ print(allSearch.result())
 '''
 Searches only for videos in YouTube.
 '''
-videosSearch = VideosSearch('NoCopyrightSounds', limit = 10, language = 'en', region = 'US')
+videosSearch = VideosSearch('NoCopyrightSounds', limit = 10, language = 'en', region = 'US', proxy = "<test>", proxyType = "https")
 
 print(videosSearch.result(mode = ResultMode.json))
 
