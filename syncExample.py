@@ -1,7 +1,7 @@
 from youtubesearchpython import *
 
 
-
+"""
 
 '''
 Searches for all types of results like videos, channels & playlists in YouTube.
@@ -10,18 +10,19 @@ Searches for all types of results like videos, channels & playlists in YouTube.
 allSearch = Search('NoCopyrightSounds', limit = 1, language = 'en', region = 'US')
 print(allSearch.result())
 
+"""
+
 
 
 
 '''
 Searches only for videos in YouTube.
 '''
-videosSearch = VideosSearch('NoCopyrightSounds', limit = 10, language = 'en', region = 'US', proxy = "<test>", proxyType = "https")
+videosSearch = VideosSearch('NoCopyrightSounds', limit = 10, language = 'en', region = 'US', proxy = "http://52.67.249.48:8080/")
 
 print(videosSearch.result(mode = ResultMode.json))
 
-
-
+"""
 
 '''
 Searches only for channels in YouTube.
@@ -181,3 +182,5 @@ Thanks for your support & love!
 
 - github.com/alexmercerind
 '''
+
+"""

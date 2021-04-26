@@ -37,6 +37,10 @@ class ResultMode:
     json = 0
     dict = 1
 
+class ProxyType:
+    HTTPS = 1
+    HTTP = 0
+
 
 class SearchMode:
     videos = 'EgIQAQ%3D%3D'
