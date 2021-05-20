@@ -1,4 +1,4 @@
-import requests
+import urllib3
 from urllib.parse import urlencode
 import pkg_resources
 import json
@@ -22,29 +22,27 @@ class RequestHandler(ComponentHandler):
             requestBody['continuation'] = self.continuationKey
         requestBodyBytes = json.dumps(requestBody).encode('utf_8')
         if self.proxy:
-            proxy = self.proxy
+            http = urllib3.ProxyManager('http://157.90.0.82:8099/')
         else:
-            proxy = None
+            http = urllib3.PoolManager()
+        print(searchKey)
 
-        try:
-            self.response = requests.post( 
-                'https://www.youtube.com/youtubei/v1/search' + '?' + urlencode({
-                    'key': searchKey,
-                }),
-                data = requestBodyBytes,
-                headers = {
-                    'Content-Type': 'application/json; charset=utf-8',
-                    'Content-Length': str(len(requestBodyBytes)),
-                    'User-Agent': userAgent,
-                },
-                proxies = {
-                    "http://": proxy
-                }
-            ).text
-            print(self.response)
-        except Exception as e:
-            print(e)
-            raise Exception('ERROR: Could not make request.')
+        #try:
+        self.response = json.loads(http.request("POST",
+            'https://www.youtube.com/youtubei/v1/search' + '?' + urlencode({
+                'key': searchKey,
+            }),
+            data = requestBodyBytes,
+            headers = {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Content-Length': str(len(requestBodyBytes)),
+                'User-Agent': userAgent,
+            }
+        ).data)
+        print(self.response)
+        #except Exception as e:
+        #    print(e)
+        #    raise Exception('ERROR: Could not make request.')
 
     
     def _parseSource(self) -> None:
